@@ -1,0 +1,22 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '${_IMAGE}', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_IMAGE}']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - '${_SERVICE_NAME}'
+      - '--image=${_IMAGE}'
+      - '--port=8080'
+      - '--region=${_REGION}'
+      - '--allow-unauthenticated'
+      - '--platform=managed'
+
+substitutions:
+  _SERVICE_NAME: brew-bean
+  _REGION: us-central1
+  _IMAGE: gcr.io/${PROJECT_ID}/${_SERVICE_NAME}
+
+timeout: 600s
