@@ -15,7 +15,7 @@ steps:
       - '--platform=managed'
 
 substitutions:
-  _SERVICE_NAME: brew-bean
+  _SERVICE_NAME: koudom-coffee-shop
   _REGION: us-central1
   _IMAGE: gcr.io/${PROJECT_ID}/${_SERVICE_NAME}
 

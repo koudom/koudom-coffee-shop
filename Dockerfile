@@ -1,7 +1,8 @@
 FROM php:8.4-apache
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
+# Enable Apache mod_rewrite and MySQL PDO support.
+RUN a2enmod rewrite \
+    && docker-php-ext-install pdo_mysql
 
 # Copy application files
 COPY . /var/www/html
